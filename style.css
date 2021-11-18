@@ -39,6 +39,55 @@
   }
 }
 
+/* Scroll To Top */
+
+#scroll-to-top {
+  --width: 45px;
+  position: fixed;
+  right: 30px;
+  bottom: 30px;
+  width: var(--width);
+  height: var(--width);
+  background-color: var(--clr-primary);
+  border: none;
+  color: #333;
+  font-size: 1.3rem;
+  border-radius: 50%;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  -ms-border-radius: 50%;
+  -o-border-radius: 50%;
+  cursor: pointer;
+  opacity: 0;
+  transition: 0.5s;
+  -webkit-transition: 0.5s;
+  -moz-transition: 0.5s;
+  -ms-transition: 0.5s;
+  -o-transition: 0.5s;
+  pointer-events: none;
+}
+
+#scroll-to-top.not-active {
+  opacity: 1;
+  pointer-events: all;
+}
+
+#scroll-to-top i {
+  transition: 0.3s;
+  -webkit-transition: 0.3s;
+  -moz-transition: 0.3s;
+  -ms-transition: 0.3s;
+  -o-transition: 0.3s;
+}
+
+#scroll-to-top:hover i {
+  transform: translateY(-4px);
+  -webkit-transform: translateY(-4px);
+  -moz-transform: translateY(-4px);
+  -ms-transform: translateY(-4px);
+  -o-transform: translateY(-4px);
+}
+
 /* Scroll Bar */
 ::-webkit-scrollbar {
   width: 0.5vw;

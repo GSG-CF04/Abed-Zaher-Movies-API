@@ -54,7 +54,7 @@ movies.then((movies) =>
     </div>
     <div class="info">
       <div class="footer">
-        <p class="title">${movie.title}</p>
+        <p class="title" title="${movie.title}">${movie.title}</p>
         <p class="year">${movie.year}</p>
       </div>
     </div>
@@ -108,7 +108,7 @@ search.addEventListener("keyup", (e) => {
     </div>
     <div class="info">
       <div class="footer">
-        <p class="title">${movie.title}</p>
+        <p class="title" title="${movie.title}">${movie.title}</p>
         <p class="year">${movie.year}</p>
       </div>
     </div>

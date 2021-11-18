@@ -30,7 +30,7 @@ movies.then((movies) =>
     ).innerHTML = `<div class="card-top">
     <div class="card">
       <img
-        src="${movie.medium_cover_image}"
+        src="${movie.medium_cover_image}
       "
         alt="image"
       />
@@ -58,7 +58,7 @@ movies.then((movies) =>
     </div>
     <div class="info">
       <div class="footer">
-        <p class="title" title="${movie.title}">${movie.title}</p>
+        <p class="title" title="${movie.title}">${movie["title_english"]}</p>
         <p class="year">${movie.year}</p>
       </div>
     </div>
@@ -75,7 +75,7 @@ const search = document.querySelector("#search-field");
 const searchURL = "https://yts.mx/api/v2/list_movies.json?query_term=";
 
 search.addEventListener("keyup", (e) => {
-  let searchTerm = e.target.value;
+  let searchTerm = e.target.value.trim();
   fetch(`${searchURL}${searchTerm}`)
     .then((resp) => resp.json())
     .then((database) => {
@@ -115,7 +115,7 @@ search.addEventListener("keyup", (e) => {
     </div>
     <div class="info">
       <div class="footer">
-        <p class="title" title="${movie.title}">${movie.title}</p>
+        <p class="title" title="${movie.title}">${movie["title_english"]}</p>
         <p class="year">${movie.year}</p>
       </div>
     </div>

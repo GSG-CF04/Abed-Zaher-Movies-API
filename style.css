@@ -93,9 +93,19 @@ body::before {
 }
 
 .cards {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-  gap: 20px;
+  /* display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+  justify-content: space-between;
+  gap: 20px; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-inline: -15px;
+  flex-wrap: wrap;
+}
+
+.card-top {
+  margin-inline: 15px;
 }
 
 @media (max-width: 567px) {
@@ -119,6 +129,7 @@ header .logo {
   font-size: 2.5rem;
   margin-bottom: 10px;
   letter-spacing: 2px;
+  text-transform: uppercase;
 }
 
 form .input-holder {

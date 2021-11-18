@@ -16,7 +16,7 @@ window.onscroll = () => {
 
 ("use strict");
 
-const baseURL = "https://yts.mx/api/v2/list_movies.json";
+const baseURL = "https://yts.mx/api/v2/list_movies.json?limit=50";
 
 let movies = fetch(baseURL)
   .then((resp) => resp.json())

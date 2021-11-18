@@ -16,7 +16,7 @@ window.onscroll = () => {
 
 ("use strict");
 
-const baseURL = "https://yts.mx/api/v2/list_movies.json";
+const baseURL = "https://yts.mx/api/v2/list_movies.json?limit=50";
 
 let movies = fetch(baseURL)
   .then((resp) => resp.json())
@@ -54,7 +54,7 @@ movies.then((movies) =>
     </div>
     <div class="info">
       <div class="footer">
-        <p class="title">${movie.title}</p>
+        <p class="title" title="${movie.title}">${movie.title}</p>
         <p class="year">${movie.year}</p>
       </div>
     </div>
@@ -108,7 +108,7 @@ search.addEventListener("keyup", (e) => {
     </div>
     <div class="info">
       <div class="footer">
-        <p class="title">${movie.title}</p>
+        <p class="title" title="${movie.title}">${movie.title}</p>
         <p class="year">${movie.year}</p>
       </div>
     </div>

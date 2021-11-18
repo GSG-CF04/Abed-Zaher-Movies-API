@@ -352,6 +352,46 @@ form #search-field {
   background-color: #47981e;
 }
 
+.card .txt .trailer {
+  margin-top: 15px;
+  text-decoration: none;
+  color: black;
+  display: block;
+  font-weight: 600;
+  font-size: 1.1rem;
+  padding: 6px 15px;
+  background-color: white;
+  border-radius: 8px;
+  -webkit-border-radius: 8px;
+  -moz-border-radius: 8px;
+  -ms-border-radius: 8px;
+  -o-border-radius: 8px;
+  transition: var(--main-transition);
+  -webkit-transition: var(--main-transition);
+  -moz-transition: var(--main-transition);
+  -ms-transition: var(--main-transition);
+  -o-transition: var(--main-transition);
+  transform: translateY(100px);
+  -webkit-transform: translateY(100px);
+  -moz-transform: translateY(100px);
+  -ms-transform: translateY(100px);
+  -o-transform: translateY(100px);
+  opacity: 0;
+}
+
+.card .txt:hover .trailer {
+  transform: translateY(0);
+  -webkit-transform: translateY(0);
+  -moz-transform: translateY(0);
+  -ms-transform: translateY(0);
+  -o-transform: translateY(0);
+  opacity: 1;
+}
+
+.card .txt .trailer:hover {
+  background-color: #aaa;
+}
+
 .card .info {
   margin-top: 10px;
   font-weight: 600;

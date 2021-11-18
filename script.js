@@ -50,6 +50,10 @@ movies.then((movies) =>
   
         </div>
         <a href="${movie.torrents[0].url}" class="download">Download</a>
+        <a href="https://www.youtube.com/watch?v=${
+          movie.yt_trailer_code
+        }" class="trailer" target='_blank'><i class="fab fa-youtube"></i> Watch Trailer</a>
+
       </div>
     </div>
     <div class="info">
@@ -104,6 +108,9 @@ search.addEventListener("keyup", (e) => {
   
         </div>
         <a href="${movie.torrents[0].url}" class="download">Download</a>
+        <a href="https://www.youtube.com/watch?v=${
+          movie.yt_trailer_code
+        }" class="trailer" target='_blank'><i class="fab fa-youtube"></i> Watch Trailer</a>
       </div>
     </div>
     <div class="info">

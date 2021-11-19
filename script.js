@@ -1,3 +1,6 @@
+"use strict";
+//use strict must be in the first line to work
+
 // Scroll To Top
 const btn = document.querySelector("#scroll-to-top");
 
@@ -14,10 +17,10 @@ window.onscroll = () => {
   } else btn.classList.remove("not-active");
 };
 
-("use strict");
-
+//API Database link
 const baseURL = "https://yts.mx/api/v2/list_movies.json?limit=50";
 
+//Add image if no image available
 function addDefaultImage() {
   document.querySelectorAll(".card img").forEach((img) => {
     img.onerror = function () {
@@ -26,58 +29,18 @@ function addDefaultImage() {
   });
 }
 
+//Fetching movies from API
 let movies = fetch(baseURL)
   .then((resp) => resp.json())
   .then((database) => database.data.movies);
 
+let card = document.querySelector(".cards");
+
+//Display movies onload
 console.log(movies);
 movies.then((movies) =>
   movies.forEach((movie) => {
-    let movieContainer = (document.createElement(
-      "div"
-    ).innerHTML = `<div class="card-top">
-    <div class="card">
-      <img
-        src="${movie.medium_cover_image}
-      "
-        alt="image"
-      />
-      <div class="txt">
-        <i class="fas fa-star star"></i>
-        <p class="rating-wrap">
-          <span class="rate">${movie.rating}</span>
-          / 10
-        </p>
-        <div class="genres">
-        ${
-          movie.genres.length > 1
-            ? `<p>${movie.genres[0]}</p> 
-             <p>${movie.genres[1]}</p>`
-            : `<p>${movie.genres[0]}</p>`
-        }
-  
-        </div>
-        <a href="${movie.torrents[0].url}" class="download">Download</a>
-        <a href="https://www.youtube.com/watch?v=${
-          movie.yt_trailer_code
-        }" class="trailer" target='_blank'><i class="fab fa-youtube"></i> Watch Trailer</a>
-
-      </div>
-    </div>
-    <div class="info">
-      <div class="footer">
-        <p class="title" title="${movie.title}">${movie["title_english"]}</p>
-        <p class="year">${movie.year}</p>
-      </div>
-    </div>
-  </div>
-    `);
-
-    document
-      .querySelector(".cards")
-      .insertAdjacentHTML("beforeend", movieContainer);
-
-    // Add a default image for non availabel images
+    displayMovies(movie);
     addDefaultImage();
   })
 );
@@ -85,6 +48,7 @@ movies.then((movies) =>
 const search = document.querySelector("#search-field");
 const searchURL = "https://yts.mx/api/v2/list_movies.json?limit=50&query_term=";
 
+//Search for movies
 search.addEventListener("input", (e) => {
   let searchTerm = e.target.value.trim();
   fetch(`${searchURL}${searchTerm}`)
@@ -94,50 +58,90 @@ search.addEventListener("input", (e) => {
       console.log(movies);
       document.querySelector(".cards").innerHTML = "";
       movies.forEach((movie) => {
-        let movieContainer = (document.createElement(
-          "div"
-        ).innerHTML = `<div class="card-top">
-    <div class="card">
-      <img
-        src="${movie.medium_cover_image}"
-      "
-        alt="image"
-      />
-      <div class="txt">
-        <i class="fas fa-star star"></i>
-        <p class="rating-wrap">
-          <span class="rate">${movie.rating}</span>
-          / 10
-        </p>
-        <div class="genres">
-        ${
-          movie.genres.length > 1
-            ? `<p>${movie.genres[0]}</p> 
-             <p>${movie.genres[1]}</p>`
-            : `<p>${movie.genres[0]}</p>`
-        }
-  
-        </div>
-        <a href="${movie.torrents[0].url}" class="download">Download</a>
-        <a href="https://www.youtube.com/watch?v=${
-          movie.yt_trailer_code
-        }" class="trailer" target='_blank'><i class="fab fa-youtube"></i> Watch Trailer</a>
-      </div>
-    </div>
-    <div class="info">
-      <div class="footer">
-        <p class="title" title="${movie.title}">${movie["title_english"]}</p>
-        <p class="year">${movie.year}</p>
-      </div>
-    </div>
-  </div>
-    `);
-
-        document
-          .querySelector(".cards")
-          .insertAdjacentHTML("beforeend", movieContainer);
-        // Add a default image for non availabel images
+        displayMovies(movie);
         addDefaultImage();
       });
     });
 });
+
+//Display Movies
+function displayMovies(movie) {
+  let movieContainer = document.createElement("div");
+  movieContainer.classList.add("card-top");
+  card.appendChild(movieContainer);
+
+  let movieCard = document.createElement("div");
+  movieCard.classList.add("card");
+  movieContainer.appendChild(movieCard);
+
+  let movieImage = document.createElement("img");
+  movieImage.src = movie.medium_cover_image;
+  movieCard.appendChild(movieImage);
+
+  let movieText = document.createElement("div");
+  movieText.classList.add("txt");
+  movieCard.appendChild(movieText);
+
+  let star = document.createElement("i");
+  star.classList.add("fas", "fa-star", "star");
+  movieText.appendChild(star);
+
+  let ratingWrap = document.createElement("p");
+  ratingWrap.classList.add("rating-wrap");
+  movieText.appendChild(ratingWrap);
+
+  let rate = document.createElement("span");
+  rate.classList.add("rate");
+  rate.textContent = movie.rating + " / 10";
+  ratingWrap.appendChild(rate);
+
+  let genres = document.createElement("div");
+  genres.classList.add("genres");
+  if (movie.genres.length > 1) {
+    genres.setAttribute("style", "white-space: pre;");
+    genres.textContent = `${movie.genres[0]} \n ${movie.genres[1]}`;
+  } else {
+    genres.textContent = movie.genres[0];
+  }
+
+  movieText.appendChild(genres);
+
+  let downloadLink = document.createElement("a");
+  downloadLink.classList.add("download");
+  downloadLink.href = movie.torrents[0].url;
+  downloadLink.textContent = "Download";
+  movieText.appendChild(downloadLink);
+
+  let youtubeLink = document.createElement("a");
+  youtubeLink.classList.add("trailer");
+  youtubeLink.href = `https://www.youtube.com/watch?v=${movie.yt_trailer_code}`;
+  youtubeLink.target = "_blank";
+  youtubeLink.textContent = "Watch Trailer";
+  movieText.appendChild(youtubeLink);
+
+  let youtubeIcon = document.createElement("i");
+  youtubeIcon.classList.add("fab", "fa-youtube");
+  youtubeLink.appendChild(youtubeIcon);
+
+  let cardInfo = document.createElement("div");
+  cardInfo.classList.add("info");
+  movieContainer.appendChild(cardInfo);
+
+  let cardFooter = document.createElement("div");
+  cardFooter.classList.add("footer");
+  cardInfo.appendChild(cardFooter);
+
+  let movieTitle = document.createElement("p");
+  movieTitle.classList.add("title");
+  cardInfo.appendChild(movieTitle);
+  movieTitle.style.color = "white";
+  movieTitle.textContent = movie["title_english"];
+
+  let movieYear = document.createElement("p");
+  movieYear.classList.add("year");
+  movieYear.style.color = "white";
+  movieYear.textContent = movie.year;
+  cardInfo.appendChild(movieYear);
+
+  document.querySelector(".cards").append(movieContainer);
+}

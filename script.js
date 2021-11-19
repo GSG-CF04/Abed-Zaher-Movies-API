@@ -18,6 +18,14 @@ window.onscroll = () => {
 
 const baseURL = "https://yts.mx/api/v2/list_movies.json?limit=50";
 
+function addDefaultImage() {
+  document.querySelectorAll(".card img").forEach((img) => {
+    img.onerror = function () {
+      this.src = "./assets/images/default-photo.jpg";
+    };
+  });
+}
+
 let movies = fetch(baseURL)
   .then((resp) => resp.json())
   .then((database) => database.data.movies);
@@ -68,13 +76,16 @@ movies.then((movies) =>
     document
       .querySelector(".cards")
       .insertAdjacentHTML("beforeend", movieContainer);
+
+    // Add a default image for non availabel images
+    addDefaultImage();
   })
 );
 
 const search = document.querySelector("#search-field");
-const searchURL = "https://yts.mx/api/v2/list_movies.json?query_term=";
+const searchURL = "https://yts.mx/api/v2/list_movies.json?limit=50&query_term=";
 
-search.addEventListener("keyup", (e) => {
+search.addEventListener("input", (e) => {
   let searchTerm = e.target.value.trim();
   fetch(`${searchURL}${searchTerm}`)
     .then((resp) => resp.json())
@@ -125,6 +136,8 @@ search.addEventListener("keyup", (e) => {
         document
           .querySelector(".cards")
           .insertAdjacentHTML("beforeend", movieContainer);
+        // Add a default image for non availabel images
+        addDefaultImage();
       });
     });
 });

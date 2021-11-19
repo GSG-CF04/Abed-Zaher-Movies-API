@@ -94,7 +94,9 @@ function displayMovies(movie) {
 
   let rate = document.createElement("span");
   rate.classList.add("rate");
-  rate.textContent = movie.rating + " / 10";
+  rate.textContent =
+    movie.rating == 0 ? "Not Rated Yet" : movie.rating + " / 10";
+
   ratingWrap.append(rate);
 
   let genres = document.createElement("div");

@@ -425,3 +425,7 @@ form #search-field {
 .footer .title:hover {
   color: rgb(255 255 255 / 0.85);
 }
+
+.footer .title:visited {
+  color: rgb(255 255 255 / 0.85);
+}

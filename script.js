@@ -131,8 +131,10 @@ function displayMovies(movie) {
   cardFooter.classList.add("footer");
   cardInfo.appendChild(cardFooter);
 
-  let movieTitle = document.createElement("p");
+  let movieTitle = document.createElement("a");
   movieTitle.classList.add("title");
+  movieTitle.href = `https://www.imdb.com/title/${movie.imdb_code}`;
+  movieTitle.target = "_blank";
   cardInfo.appendChild(movieTitle);
   movieTitle.style.color = "white";
   movieTitle.textContent = movie["title_english"];

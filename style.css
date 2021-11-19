@@ -412,4 +412,13 @@ form #search-field {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  text-decoration: none;
+}
+
+.title:link {
+  color: #fff;
+}
+
+.title:visited {
+  color: #fff;
 }

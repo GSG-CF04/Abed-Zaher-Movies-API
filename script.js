@@ -1,5 +1,5 @@
 "use strict";
-//use strict must be in the first line to work
+// use strict must be in the first line to work
 
 // Scroll To Top
 const btn = document.querySelector("#scroll-to-top");
@@ -37,7 +37,6 @@ let movies = fetch(baseURL)
 let card = document.querySelector(".cards");
 
 //Display movies onload
-console.log(movies);
 movies.then((movies) =>
   movies.forEach((movie) => {
     displayMovies(movie);
@@ -45,17 +44,20 @@ movies.then((movies) =>
   })
 );
 
+const form = document.forms[0];
 const search = document.querySelector("#search-field");
 const searchURL = "https://yts.mx/api/v2/list_movies.json?limit=50&query_term=";
 
-//Search for movies
+// Prevent auto refresh when submitting the form
+form.onsubmit = (e) => e.preventDefault();
+
+// Search for movies
 search.addEventListener("input", (e) => {
   let searchTerm = e.target.value.trim();
   fetch(`${searchURL}${searchTerm}`)
     .then((resp) => resp.json())
     .then((database) => {
       let movies = database.data.movies;
-      console.log(movies);
       document.querySelector(".cards").innerHTML = "";
       movies.forEach((movie) => {
         displayMovies(movie);
@@ -64,36 +66,38 @@ search.addEventListener("input", (e) => {
     });
 });
 
-//Display Movies
+// Display Movies
 function displayMovies(movie) {
   let movieContainer = document.createElement("div");
   movieContainer.classList.add("card-top");
-  card.appendChild(movieContainer);
+  card.append(movieContainer);
 
   let movieCard = document.createElement("div");
   movieCard.classList.add("card");
-  movieContainer.appendChild(movieCard);
+  movieContainer.append(movieCard);
 
   let movieImage = document.createElement("img");
   movieImage.src = movie.medium_cover_image;
-  movieCard.appendChild(movieImage);
+  movieCard.append(movieImage);
 
   let movieText = document.createElement("div");
   movieText.classList.add("txt");
-  movieCard.appendChild(movieText);
+  movieCard.append(movieText);
 
   let star = document.createElement("i");
   star.classList.add("fas", "fa-star", "star");
-  movieText.appendChild(star);
+  movieText.append(star);
 
   let ratingWrap = document.createElement("p");
   ratingWrap.classList.add("rating-wrap");
-  movieText.appendChild(ratingWrap);
+  movieText.append(ratingWrap);
 
   let rate = document.createElement("span");
   rate.classList.add("rate");
-  rate.textContent = movie.rating + " / 10";
-  ratingWrap.appendChild(rate);
+  rate.textContent =
+    movie.rating == 0 ? "Not Rated Yet" : movie.rating + " / 10";
+
+  ratingWrap.append(rate);
 
   let genres = document.createElement("div");
   genres.classList.add("genres");
@@ -104,46 +108,45 @@ function displayMovies(movie) {
     genres.textContent = movie.genres[0];
   }
 
-  movieText.appendChild(genres);
+  movieText.append(genres);
 
   let downloadLink = document.createElement("a");
   downloadLink.classList.add("download");
   downloadLink.href = movie.torrents[0].url;
   downloadLink.textContent = "Download";
-  movieText.appendChild(downloadLink);
+  movieText.append(downloadLink);
 
   let youtubeLink = document.createElement("a");
   youtubeLink.classList.add("trailer");
   youtubeLink.href = `https://www.youtube.com/watch?v=${movie.yt_trailer_code}`;
   youtubeLink.target = "_blank";
-  youtubeLink.textContent = "Watch Trailer";
-  movieText.appendChild(youtubeLink);
+  youtubeLink.textContent = " Watch Trailer";
+  movieText.append(youtubeLink);
 
   let youtubeIcon = document.createElement("i");
-  youtubeIcon.classList.add("fab", "fa-youtube");
-  youtubeLink.appendChild(youtubeIcon);
+  youtubeIcon.className = "fab fa-youtube";
+  youtubeLink.prepend(youtubeIcon);
 
   let cardInfo = document.createElement("div");
   cardInfo.classList.add("info");
-  movieContainer.appendChild(cardInfo);
+  movieContainer.append(cardInfo);
 
-  let cardFooter = document.createElement("div");
-  cardFooter.classList.add("footer");
-  cardInfo.appendChild(cardFooter);
+  let footer = document.createElement("div");
+  footer.className = "footer";
+  cardInfo.append(footer);
 
-  let movieTitle = document.createElement("a");
-  movieTitle.classList.add("title");
-  movieTitle.href = `https://www.imdb.com/title/${movie.imdb_code}`;
-  movieTitle.target = "_blank";
-  cardInfo.appendChild(movieTitle);
-  movieTitle.style.color = "white";
-  movieTitle.textContent = movie["title_english"];
+  let title = document.createElement("a");
+  title.className = "title";
+  title.href = ` https://www.imdb.com/title/${movie.imdb_code}`;
+  title.target = "_blank";
+  title.textContent = movie.title_english;
+  title.title = movie.title_english;
 
-  let movieYear = document.createElement("p");
-  movieYear.classList.add("year");
-  movieYear.style.color = "white";
-  movieYear.textContent = movie.year;
-  cardInfo.appendChild(movieYear);
+  let Movieyear = document.createElement("p");
+  Movieyear.className = "year";
+  Movieyear.textContent = movie.year;
+
+  footer.append(title, Movieyear);
 
   document.querySelector(".cards").append(movieContainer);
 }

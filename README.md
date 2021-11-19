@@ -7,6 +7,7 @@
 * [Description](#desc)
 * [Features](#features)
 * [Live link](#live)
+* [Clone It](#clone-it)
 * [About us](#about-us)
 * [Website layout](#layout)
 * [API](#API)
@@ -31,7 +32,15 @@ You can visit our live website [Here](https://gsg-cf04.github.io/Abed-Zaher-Movi
 
 ## **Team members:** <span id='about-us'></span>
 - [AbedalRahman Shamia](https://github.com/abedshamia)
-- [Zaher Abuamro](https://github.com/zaher-aa)
+- [Zaher J. Abuamro](https://github.com/zaher-aa)
+
+## **Clone It** <span id='clone-it'></span>
+1. First step is to copy the repository link `https://github.com/GSG-CF04/Abed-Zaher-Movies-API.git`
+2. After that go to any directory in your machine and right-click to 'Open Gitbash Here'
+3. Next, Paste this to Gitbash `git clone https://github.com/GSG-CF04/Abed-Zaher-Movies-API.git`
+4. Change your current directory by typing `cd ./Abed-Zaher-Movies-API`
+5. Finally, `code .` and your text editor will launch
+
 
 ## **Website Layout** <span id='layout'></span>
 ![image](https://user-images.githubusercontent.com/73759748/142464391-0005b1e5-9083-483d-91ba-ae9862addcf9.png)
@@ -42,4 +51,4 @@ You can visit our live website [Here](https://gsg-cf04.github.io/Abed-Zaher-Movi
 
 ## **API Used** <span id='API'></span>
 
-YTS API has been used.
+[YTS](https://yts.mx/api) API has been used.

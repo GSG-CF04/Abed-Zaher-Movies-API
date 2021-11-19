@@ -37,7 +37,6 @@ let movies = fetch(baseURL)
 let card = document.querySelector(".cards");
 
 //Display movies onload
-console.log(movies);
 movies.then((movies) =>
   movies.forEach((movie) => {
     displayMovies(movie);
@@ -59,7 +58,6 @@ search.addEventListener("input", (e) => {
     .then((resp) => resp.json())
     .then((database) => {
       let movies = database.data.movies;
-      console.log(movies);
       document.querySelector(".cards").innerHTML = "";
       movies.forEach((movie) => {
         displayMovies(movie);

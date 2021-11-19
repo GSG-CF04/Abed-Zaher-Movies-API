@@ -135,8 +135,10 @@ function displayMovies(movie) {
   footer.className = "footer";
   cardInfo.append(footer);
 
-  let title = document.createElement("p");
+  let title = document.createElement("a");
   title.className = "title";
+  title.href = ` https://www.imdb.com/title/${movie.imdb_code}`;
+  title.target = "_blank";
   title.textContent = movie.title_english;
   title.title = movie.title_english;
 

@@ -327,11 +327,11 @@ form #search-field {
   -moz-transition: var(--main-transition);
   -ms-transition: var(--main-transition);
   -o-transition: var(--main-transition);
-  transform: translateY(100px);
-  -webkit-transform: translateY(100px);
-  -moz-transform: translateY(100px);
-  -ms-transform: translateY(100px);
-  -o-transform: translateY(100px);
+  transform: translateY(126px);
+  -webkit-transform: translateY(126px);
+  -moz-transform: translateY(126px);
+  -ms-transform: translateY(126px);
+  -o-transform: translateY(126px);
   opacity: 0;
 }
 

@@ -29,20 +29,18 @@ function addDefaultImage() {
   });
 }
 
-//Fetching movies from API
-let movies = fetch(baseURL)
-  .then((resp) => resp.json())
-  .then((database) => database.data.movies);
+const card = document.querySelector(".cards");
 
-let card = document.querySelector(".cards");
+async function fetchData(url) {
+  const response = await fetch(url);
+  const data = await response.json();
+  const movies = data.data.movies;
+  card.innerHTML = "";
+  movies.forEach((movie) => displayMovies(movie));
+  addDefaultImage();
+}
 
-//Display movies onload
-movies.then((movies) =>
-  movies.forEach((movie) => {
-    displayMovies(movie);
-    addDefaultImage();
-  })
-);
+fetchData(baseURL);
 
 const form = document.forms[0];
 const search = document.querySelector("#search-field");
@@ -54,16 +52,7 @@ form.onsubmit = (e) => e.preventDefault();
 // Search for movies
 search.addEventListener("input", (e) => {
   let searchTerm = e.target.value.trim();
-  fetch(`${searchURL}${searchTerm}`)
-    .then((resp) => resp.json())
-    .then((database) => {
-      let movies = database.data.movies;
-      document.querySelector(".cards").innerHTML = "";
-      movies.forEach((movie) => {
-        displayMovies(movie);
-        addDefaultImage();
-      });
-    });
+  fetchData(`${searchURL}${searchTerm}`);
 });
 
 // Display Movies
